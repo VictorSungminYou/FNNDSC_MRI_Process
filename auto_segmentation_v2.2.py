@@ -486,17 +486,20 @@ def align():
     alignment_func(input_fol+'/temp_recon_1/alignment_temp/')
     alignment_func(input_fol+'/temp_recon_2/alignment_temp/')
     alignment_func(input_fol+'/temp_recon_3/alignment_temp/')
-    
-    for r in rnum:
-        os.system('cp '+input_fol+'/temp_recon_'+r+'/alignment_temp/recon_to31.* '+input_fol+'/temp_recon_'+r)
 
-        os.system('~/arch/Linux64/packages/ANTs/current/bin/N4BiasFieldCorrection -d 3 -o '+input_fol+'/temp_recon_'+r+'/recon_to31_nuc.nii -i '+input_fol+'/temp_recon_'+r+'/recon_to31.nii;')
-
-        os.system('convert_xfm -omat '+input_fol+'/temp_recon_'+r+'/recon_to31_inv.xfm -inverse '+input_fol+'/temp_recon_'+r+'/recon_to31.xfm;')
-        os.system('echo `avscale '+input_fol+'/temp_recon_'+r+'/recon_to31_inv.xfm | grep Scales` > '+input_fol+'/temp/temp.txt;')
-        scales=open(input_fol+'/temp/temp.txt', encoding='utf-8')
-        scales=scales.read()
-        os.system('param2xfm -clobber -scales '+scales[16:-1]+' '+input_fol+'/temp_recon_'+r+'/recon_native.xfm;')
+# NUC after alignment
+def Post_NUC():
+    rnum=("1","2","3")
+    	for r in rnum:
+	        os.system('cp '+input_fol+'/temp_recon_'+r+'/alignment_temp/recon_to31.* '+input_fol+'/temp_recon_'+r)
+	
+	        os.system('~/arch/Linux64/packages/ANTs/current/bin/N4BiasFieldCorrection -d 3 -o '+input_fol+'/temp_recon_'+r+'/recon_to31_nuc.nii -i '+input_fol+'/temp_recon_'+r+'/recon_to31.nii;')
+	
+	        os.system('convert_xfm -omat '+input_fol+'/temp_recon_'+r+'/recon_to31_inv.xfm -inverse '+input_fol+'/temp_recon_'+r+'/recon_to31.xfm;')
+	        os.system('echo `avscale '+input_fol+'/temp_recon_'+r+'/recon_to31_inv.xfm | grep Scales` > '+input_fol+'/temp/temp.txt;')
+	        scales=open(input_fol+'/temp/temp.txt', encoding='utf-8')
+	        scales=scales.read()
+	        os.system('param2xfm -clobber -scales '+scales[16:-1]+' '+input_fol+'/temp_recon_'+r+'/recon_native.xfm;')
 
 #auto segmentation
 def auto_seg():
