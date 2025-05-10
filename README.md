@@ -175,20 +175,3 @@ Input arguments:
 Outputs:	*h.parcel.dset (Parcellation label maps)
 
 
-
-Update note
-Jan 8, 2025	
-Revised Surface_measures_original_v0.1.py	Revised spacing issues in “Volume_measures.txt” and “GI_info_final.txt”
-
-Jan 10, 2025
-Added Volume_measures_v0.0.py	Volume measurements are moved to part1
-Revised part1/main.py		Flag options are added. 
-After brain masking, “verify” folder is created under ${file}, which contains images of raw brains.
-Revised part1/src/qa.py 		
-After QA, “Best_Image_crop” folder is created under ${file}, which contains images of volumes over the threshold(0.4).
-
-Jan 13, 2025
-Added automatic_parcellation.py	Perform automatic parcellation using Spherical U-net. https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2024.1410936/full 
-
-Jan 31, 2025
-Revised part2/main.py		Added “--inner_only” flag option
